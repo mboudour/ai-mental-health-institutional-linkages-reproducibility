@@ -136,7 +136,7 @@ def figure_2_indicators(overlap: pd.DataFrame, out: Path) -> None:
     colors = ["#C9D3DD", TEAL, GOLD, PURPLE]
     labels = ["Neither", "Ethics/\nresponsibility only", "Computational-\nperformance only", "Both"]
     data = data.set_index("overlap_group").reindex(order).reset_index()
-    fig, ax = plt.subplots(figsize=(8.7, 5.2))
+    fig, ax = plt.subplots(figsize=(8.7, 5.9))
     bars = ax.bar(labels, data["pct_of_P"], color=colors, width=0.68)
     ax.set_ylabel("Share of publications in P (%)")
     ax.set_ylim(0, max(data["pct_of_P"]) * 1.18)
@@ -144,7 +144,8 @@ def figure_2_indicators(overlap: pd.DataFrame, out: Path) -> None:
     ax.grid(axis="y")
     for bar, n, pct in zip(bars, data["n_publications"], data["pct_of_P"]):
         ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 1.0, f"{n:,}\n({pct:.1f}%)", ha="center", va="bottom", fontsize=9)
-    ax.text(0.01, -0.20, "Indicators were measured from publication titles plus available abstracts. The narrow computational-performance dictionary is the primary specification.", transform=ax.transAxes, fontsize=8.5, color=MUTED)
+    # Dictionary specification and source-field information are stated in the
+    # manuscript caption, leaving the figure solely for the measured values.
     save_figure(fig, out, "figure_2_text_indicators")
 
 
