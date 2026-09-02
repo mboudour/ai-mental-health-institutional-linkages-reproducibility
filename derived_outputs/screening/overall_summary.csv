@@ -1,0 +1,2 @@
+candidate_publications,retained_publications,excluded_publications,retained_pct,excluded_pct,records_with_available_abstract,records_without_abstract,rule_reproduced_exactly,rule_mismatch_n
+13574,11102,2472,81.78871371740092,18.211286282599087,13129,445,True,0

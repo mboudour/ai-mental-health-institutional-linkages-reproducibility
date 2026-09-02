@@ -1,0 +1,5 @@
+analysis,statistic,observed,null_mean,enrichment,two_sided_permutation_p,n_permutations,fixed_singleton_year_strata,permuted_year_strata
+full_system,N_both,98.0,61.805,1.5856322304020711,0.0019980019980019,1000,0,26
+highest_contributor_removed,N_both,97.0,61.052,1.5888095394090285,0.0019980019980019,1000,0,26
+full_system,intensive_degree_product_sum,696.0,318.128,2.1877986219383394,0.0039960039960039,1000,0,26
+highest_contributor_removed,intensive_degree_product_sum,566.0,297.389,1.903231121527696,0.0099900099900099,1000,0,26

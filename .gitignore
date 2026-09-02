@@ -1,0 +1,21 @@
+# Credentials
+key.txt
+*.key
+*.env
+.env
+
+# Raw or reconstructed Dimensions records and record-level relations
+/data/
+raw_data/
+reconstructed_data/
+*.pkl
+*.xlsx
+
+# Python build products
+__pycache__/
+*.py[cod]
+
+# Local editor and operating-system files
+.DS_Store
+.vscode/
+.idea/

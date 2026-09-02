@@ -1,0 +1,14 @@
+model_label,sample_label,outcome,n_publications_before_complete_model_rows,n_events_before_complete_model_rows,include_citation_adjustment,publication_year_functional_form,abstract_available_only,interpretation
+grant_primary,grant_primary,has_grant_link,11102,1974,True,linear,False,Association model of a Dimensions-recorded linkage outcome.
+grant_complete_case,grant_abstract_available,has_grant_link,10766,1954,True,linear,True,Association model of a Dimensions-recorded linkage outcome.
+grant_no_citation_adjustment,grant_primary,has_grant_link,11102,1974,False,linear,False,Association model of a Dimensions-recorded linkage outcome.
+grant_flexible_year,grant_primary,has_grant_link,11102,1974,True,spline,False,Association model of a Dimensions-recorded linkage outcome.
+grant_start_on_or_before_publication,grant_start_on_or_before_publication,has_grant_start_on_or_before_publication_link,11102,1972,True,linear,False,Association model of a Dimensions-recorded linkage outcome.
+policy_2021_primary,policy_through_2021_primary,has_policy_document_link,2271,147,True,linear,False,Association model of a Dimensions-recorded linkage outcome.
+policy_2020_robustness,policy_through_2020_robustness,has_policy_document_link,1550,120,True,linear,False,Association model of a Dimensions-recorded linkage outcome.
+policy_2021_complete_case,policy_through_2021_abstract_available,has_policy_document_link,2197,147,True,linear,True,Association model of a Dimensions-recorded linkage outcome.
+policy_2020_complete_case,policy_through_2020_abstract_available,has_policy_document_link,1494,120,True,linear,True,Association model of a Dimensions-recorded linkage outcome.
+policy_2021_no_citation_adjustment,policy_through_2021_primary,has_policy_document_link,2271,147,False,linear,False,Association model of a Dimensions-recorded linkage outcome.
+policy_2020_no_citation_adjustment,policy_through_2020_robustness,has_policy_document_link,1550,120,False,linear,False,Association model of a Dimensions-recorded linkage outcome.
+policy_2021_flexible_year,policy_through_2021_primary,has_policy_document_link,2271,147,True,spline,False,Association model of a Dimensions-recorded linkage outcome.
+policy_2020_flexible_year,policy_through_2020_robustness,has_policy_document_link,1550,120,True,spline,False,Association model of a Dimensions-recorded linkage outcome.

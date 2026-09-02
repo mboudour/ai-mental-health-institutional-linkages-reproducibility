@@ -1,0 +1,6 @@
+check,passed,detail
+unique_publication_ids,True,13574 candidate records
+screening_rule_reproduced_from_saved_matches,True,0 mismatches
+retained_records_have_both_phrase_classes,True,Checked against saved matched-term fields
+excluded_records_fail_at_least_one_phrase_class,True,Checked against saved matched-term fields
+random_samples_reproducible,True,NumPy/pandas random_state=20260902

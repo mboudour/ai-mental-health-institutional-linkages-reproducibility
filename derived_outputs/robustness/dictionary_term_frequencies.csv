@@ -1,0 +1,31 @@
+indicator,term,n_publications_any_text,n_publications_title,n_publications_abstract,pct_of_publications_any_text
+ethics_responsibility_primary,AI governance,15,0,15,0.1351107908484957
+ethics_responsibility_primary,AI regulation,3,0,3,0.0270221581696991
+ethics_responsibility_primary,accountab*,95,3,94,0.8557016753738066
+ethics_responsibility_primary,algorithmic bias,130,1,130,1.1709601873536302
+ethics_responsibility_primary,algorithmic governance,3,0,3,0.0270221581696991
+ethics_responsibility_primary,algorithmic regulation,1,0,1,0.0090073860565663
+ethics_responsibility_primary,bias mitigation,17,0,17,0.1531255629616285
+ethics_responsibility_primary,data privacy,266,2,266,2.3959646910466583
+ethics_responsibility_primary,ethic*,1305,150,1287,11.754638803819132
+ethics_responsibility_primary,explainab*,334,130,310,3.0084669428931723
+ethics_responsibility_primary,fairness,86,6,85,0.774635200864709
+ethics_responsibility_primary,health equity,27,5,26,0.2431994235272923
+ethics_responsibility_primary,human rights,21,2,21,0.189155107187894
+ethics_responsibility_primary,informed consent,82,3,81,0.7386056566384436
+ethics_responsibility_primary,interpretab*,498,64,484,4.485678256170059
+ethics_responsibility_primary,privacy-preserving,46,12,42,0.4143397586020537
+ethics_responsibility_primary,responsible AI,27,3,26,0.2431994235272923
+ethics_responsibility_primary,responsible artificial intelligence,5,2,4,0.0450369302828319
+ethics_responsibility_primary,transparen*,389,8,389,3.503873176004323
+ethics_responsibility_primary,trustworthy AI,8,0,8,0.072059088452531
+computational_performance_primary,ROC-AUC,61,0,61,0.5494505494505495
+computational_performance_primary,area under the curve,252,0,252,2.269861286254729
+computational_performance_primary,classification performance,168,1,168,1.5132408575031526
+computational_performance_primary,cross-validation,499,6,497,4.494685642226626
+computational_performance_primary,external validation,112,9,109,1.008827238335435
+computational_performance_primary,model accuracy,32,1,31,0.2882363538101243
+computational_performance_primary,model performance,272,1,272,2.4500090073860568
+computational_performance_primary,predictive accuracy,154,1,153,1.3871374527112232
+computational_performance_primary,predictive performance,180,2,179,1.6213294901819493
+computational_performance_primary,receiver operating characteristic,252,0,252,2.269861286254729

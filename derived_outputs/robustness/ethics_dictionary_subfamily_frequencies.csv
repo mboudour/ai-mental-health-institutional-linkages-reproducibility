@@ -1,0 +1,7 @@
+indicator,dictionary_subfamily,component_terms,n_publications_with_at_least_one_component_term,pct_of_publications,purpose
+ethics_responsibility_primary,Ethics (general),ethic*,1305,11.754638803819132,Descriptive composition of the primary composite indicator; not an association model.
+ethics_responsibility_primary,Fairness and bias,algorithmic bias; bias mitigation; fairness,215,1.9365880021617727,Descriptive composition of the primary composite indicator; not an association model.
+ethics_responsibility_primary,"Explainability, interpretability, transparency, and accountability",accountab*; explainab*; interpretab*; transparen*,989,8.908304809944154,Descriptive composition of the primary composite indicator; not an association model.
+ethics_responsibility_primary,Privacy and consent,data privacy; informed consent; privacy-preserving,370,3.332732840929562,Descriptive composition of the primary composite indicator; not an association model.
+ethics_responsibility_primary,"Responsibility, governance, and regulation",AI governance; AI regulation; algorithmic governance; algorithmic regulation; responsible AI; responsible artificial intelligence; trustworthy AI,55,0.4954062331111512,Descriptive composition of the primary composite indicator; not an association model.
+ethics_responsibility_primary,Equity and rights,health equity; human rights,48,0.4323545307151865,Descriptive composition of the primary composite indicator; not an association model.

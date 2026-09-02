@@ -1,0 +1,39 @@
+{
+  "script_version": "targeted_robustness_and_reporting_1.0",
+  "created_utc": "2026-09-02T13:56:43.535730+00:00",
+  "policy_cutoffs": {
+    "primary": 2021,
+    "robustness": 2020
+  },
+  "focal_indicators": [
+    "ethics_responsibility_primary",
+    "computational_performance_primary"
+  ],
+  "supplementary_topic_families": [
+    "mental_health_conditions_symptoms",
+    "clinical_assessment_diagnosis",
+    "treatment_intervention",
+    "neurocognitive_affective_processes"
+  ],
+  "targeted_robustness": [
+    "abstract-available complete-case models",
+    "citation-omitted models",
+    "cubic B-spline publication-year models",
+    "Firth penalized-logistic policy models",
+    "grant-start-on-or-before-publication secondary outcome",
+    "highest-contributor deletion sensitivity for configuration alignment"
+  ],
+  "not_conducted": [
+    "post-hoc indicator-subfamily association models",
+    "event-history or survival analysis",
+    "grant-count model conditional on having a grant link",
+    "new manual coding validation study"
+  ],
+  "permutation_details": {
+    "n_permutations": 1000,
+    "random_seed": 20260902,
+    "scheme": "one-to-one P-end permutation of complete P-D incidence profiles within publication-year strata; singleton strata fixed",
+    "p_value_formula": "two-sided p = min(1, 2 * min((1 + count(null >= observed))/(1 + B), (1 + count(null <= observed))/(1 + B)))"
+  },
+  "interpretive_boundary": "All outputs concern Dimensions-recorded relations and conditional associations. They do not establish causal effects, institutional intentions, funding decisions, policy impact, endorsement, or topical affinity."
+}

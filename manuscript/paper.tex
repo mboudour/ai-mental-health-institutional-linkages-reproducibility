@@ -1,0 +1,290 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{authblk}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage{xcolor}
+
+\geometry{margin=1in}
+\setstretch{1.35}
+\hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue}
+\let\footnote\thanks
+
+\newcommand{\maybefigure}[3]{%
+  \begin{figure}[#1]
+  \centering
+  \IfFileExists{#2}{\includegraphics[width=\linewidth]{#2}}{\fbox{\parbox[c][2.4in][c]{0.92\linewidth}{\centering Figure file pending: \texttt{#2}}}}
+  \caption{#3}
+  \end{figure}%
+}
+
+\title{Ethics, Computation, and Institutional Linkages in AI and Mental-Health Research}
+
+\author[1]{Moses Boudourides}
+\author[2]{Niko M{\"a}nnikk{\"o}}
+\affil[1]{School of Professional Studies, Northwestern University, Evanston, IL, USA%
+\authorcr\texttt{Moses.Boudourides@northwestern.edu}}
+\affil[2]{Centre for Research and Innovation, Oulu University of Applied Sciences, Finland%
+\authorcr\texttt{mannikkon@gmail.com}}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Artificial intelligence (AI) research in mental health simultaneously develops computational capabilities and confronts questions of ethics and responsibility. Yet comparatively little is known about how explicit publication-language indicators are positioned within the recorded relations connecting publications to research funding and policy documents. We constructed a publication-anchored relational system from Dimensions comprising 11,102 publications (2000--2025), 3,983 linked grants, and 255 linked policy documents. Candidate publications were retrieved with an AI/ML and core mental-health query and screened locally using a transparent title/abstract rule requiring explicit evidence of both elements. We measured non-exclusive ethics/responsibility and computational-performance indicators in publication titles and available abstracts, estimated adjusted associations with recorded grant and policy-document linkage, and tested local alignment of grant and policy-document ties using a publication-year-stratified permutation null. Ethics/responsibility language was negatively associated with grant linkage (OR 0.74) and positively associated with policy-document linkage in the through-2021 eligibility analysis (OR 2.00), whereas computational-performance language was positively associated with grant linkage (OR 1.50) but not policy-document linkage. Although only 98 publications had both grant and policy-document links, this joint configuration was 1.586 times more frequent than expected under the year-stratified null; grant and policy-document degrees were 2.188 times as concentrated on the same publications as expected. These results characterize conditional associations and the observed structure of Dimensions-recorded links; they do not establish causal funding processes, institutional intention, policy endorsement, policy impact, or topical affinity.
+\end{abstract}
+
+\section{Introduction}
+
+AI and machine-learning methods are increasingly used in mental-health research for assessment, prediction, intervention, monitoring, and the analysis of digital or clinical information \citep{straw2020artificial,beg2025,raygozal2025}. This expanding field simultaneously develops computational capabilities and confronts questions of fairness, privacy, explainability, accountability, and responsible deployment \citep{bansal2026,carneiro2025,pardo2026}. A publication may contain explicit language related to both ethics/responsibility and computational performance. How these observable publication characteristics are situated within the institutional relations connecting research to grants and policy documents remains an empirical question.
+
+We address this question through a publication-centered design. The anchor is a defined set of AI-and-mental-health publications, denoted by $P$. Grants ($G$) are retrieved only through grant identifiers recorded on $P$; policy documents ($D$) are retrieved only where their recorded publication identifiers contain an identifier in $P$; and policy issuers ($I$) are attached through recorded issuer attributes. This design permits direct examination of Dimensions-recorded $P$--$G$, $P$--$D$, and $D$--$I$ relations rather than an inference of linkage from separately retrieved collections.
+
+Differentiated relational positioning matters because research visibility is not a single institutional dimension. Language associated with computational evaluation may be differently represented in grant-linked publications than in policy-linked publications, while language associated with ethics and responsibility may show a different pattern. Examining these patterns does not identify selection or causation, but it can show whether explicit publication-language indicators have distinct associations with recorded institutional links and whether those links are locally concentrated on some of the same publications.
+
+The study asks whether explicit ethics/responsibility and computational-performance indicators are differentially associated with recorded grant and policy-document linkage, and whether the two relation types are co-located on the same publications more often than expected after accounting for publication year. The analysis uses transparent publication-level text indicators, actual Dimensions identifiers, publication-age eligibility analyses for policy-document linkage, and a local cross-relation permutation test. A recorded policy-document linkage is not equivalent to policy impact, endorsement, or topical affinity.
+
+The study makes three contributions. It introduces a reproducible two-stage construction of a publication anchor: a documented Dimensions candidate retrieval followed by a literal title/abstract screen. It estimates adjusted associations between publication indicators and recorded grant or policy-document links while accounting for publication year, scholarly citations, and supplementary topic descriptors. Finally, it distinguishes extensive-margin alignment---the number of publications with both relation types---from intensive-margin alignment---the concentration of grant and policy-document degree on the same publications---using a publication-year-stratified permutation null.
+
+\section{Literature Review}
+
+\subsection{AI in Mental Health is a Heterogeneous Field}
+
+Artificial intelligence (AI) is increasingly being applied in mental health care to address persistent challenges such as limited access, stigma, and resource constraints. Its applications span diagnosis, prediction, intervention, and monitoring, encompassing tools such as chatbots, machine-learning models, and digital platforms that support early detection, personalized treatment, and real-time symptom tracking \citep{beg2025,raygozal2025,saputra2026}. The field is characterized by a broad range of approaches and rapidly expanding research activity, including developments in natural-language processing, multimodal data analysis, and predictive analytics \citep{pardo2026,elsayary2026,jin2023}.
+
+These advances are accompanied by important concerns about data privacy, algorithmic bias, and the potential dehumanization of care \citep{bansal2026,raygozal2025}. Such concerns motivate regulatory frameworks and interdisciplinary collaboration aimed at equitable and responsible implementation \citep{beg2025,mikaeili2025,riva2025}. The development and use of AI in mental health thus brings computational, clinical, ethical, and social considerations into the same broad research field \citep{maidment2026,carneiro2025,pardo2026}.
+
+\subsection{Ethics/Responsibility and Computational Performance as Explicit Publication Indicators}
+
+The literature distinguishes research concerned with model performance, prediction, validation, and measurable technical performance from research concerned with fairness, transparency, accountability, privacy, and responsibility \citep{mller2017,muoz2008}. These concerns may coexist within individual publications rather than form mutually exclusive document classes. Accordingly, this study does not infer researchers' intentions or assign documents to fixed categories. Instead, it measures whether explicit language associated with ethics/responsibility and computational performance appears in each publication's title or available abstract.
+
+This operationalization is intentionally modest. It identifies observable textual indicators, not comprehensive substantive orientations. The distinction nevertheless matters because evaluative language can shape how research is described, assessed, and made visible across institutional contexts \citep{wouters2006,mller2017}. A transparent indicator design also allows direct robustness checks against narrower or expanded dictionaries, rather than treating vocabulary choice as an untested limitation.
+
+\subsection{Research Funding and the Organization of Research Activity}
+
+Research funding can shape research agendas, prioritize areas of inquiry, and influence which topics, methods, and questions receive sustained support \citep{laudel2014,franssen2018}. Strategic initiatives may encourage work on particular societal needs or emerging fields, while competitive schemes can affect the conditions under which research is conducted \citep{kayyali2025,cartier2018,schweiger2024}. Funding systems are therefore relevant institutional settings for studying the recorded association between publication attributes and linked grant records.
+
+However, record-level grant links should not be read as direct evidence that a funder selected a publication's language or orientation. Grant start dates frequently precede publication dates, and the present data do not identify decision processes, proposal evaluations, or the full causal sequence from funding to publication. The appropriate empirical question is consequently associational: which explicit publication indicators are differentially represented among publications with a Dimensions-recorded grant linkage?
+
+\subsection{Policy Documents, Research Links, and Institutional Context}
+
+The relationship between research and policy is nonlinear, selective, and context dependent \citep{almeida2006,ritman2014}. Knowledge-translation scholarship emphasizes the synthesis, communication, and application of research, while also recognizing that policy organizations work through administrative, legal, and political considerations \citep{lauck2023,jaca2023,oelke2015}. Policy documents may cite or otherwise link to research for many reasons, and a recorded relation does not by itself indicate uptake, endorsement, influence, or topical affinity.
+
+For that reason, we treat policy documents in Dimensions as heterogeneous records that are connected to publications through recorded \texttt{publication\_ids}. Their issuer attributes provide a descriptive institutional annotation of those records. The analysis asks whether a publication has a recorded policy-document linkage after an adequate observation window; it does not assess the content, effect, or quality of the linked policy documents.
+
+\subsection{A Publication-Centered Relational Perspective}
+
+Scientific publications, grants, and policy records are often studied separately. A relational perspective instead begins with observed links between these entities \citep{nag2013,gutirrezsnchez2025,almeida2006}. In the present design, $P$ publications are the common mode. The raw two-mode relations are publication--grant ($P$--$G$), publication--policy document ($P$--$D$), and policy document--issuer ($D$--$I$). The latter is an issuer attribution: each retained policy document has one recorded issuer.
+
+This perspective makes it possible to study how grant and policy-document relations intersect locally through the same publications. It does not presume a linear chain from research to funding to policy. Instead, it asks whether the observed co-location of $P$--$G$ and $P$--$D$ relations differs from an explicit null expectation that preserves year-conditioned opportunity.
+
+\subsection{Computational and Relational Methods}
+
+Computational research mapping can combine transparent text operationalization with record-level relational analysis. Large datasets can be used to construct explicit indicators, assess their robustness, and test association patterns while retaining uncertainty and model assumptions \citep{khurana2023,zhang2025,rashid2019}. Where records contain explicit cross-entity identifiers, two-mode network descriptions and permutation methods can assess the intersection of relation types without treating heterogeneous documents as directly comparable text collections \citep{kortum2021,jose2025}.
+
+The present study follows this latter strategy. Its computational approach uses literal publication screening, audited indicator dictionaries, robust logistic regression, record-year comparisons, and a publication-year-stratified permutation null for local cross-relation alignment. These methods retain the distinction between explicit publication language and recorded institutional links, while avoiding inferences about document content, topical affinity, or policy influence that the available record relations cannot establish.
+
+\section{Methods}
+
+\subsection{Design and Research Questions}
+
+We conducted an observational, publication-anchored analysis of Dimensions records from 2000 through 2025. The record system comprises publications ($P$), grants ($G$), policy documents ($D$), and policy issuers ($I$). Indicator prevalence is reported as descriptive groundwork. The study then addressed three questions:
+
+\begin{enumerate}
+    \item Are explicit ethics/responsibility and computational-performance indicators associated with a Dimensions-recorded grant linkage?
+    \item Are these indicators associated with a Dimensions-recorded policy-document linkage among publications satisfying the prespecified publication-age eligibility criterion?
+    \item Are recorded $P$--$G$ and $P$--$D$ relations locally aligned on the same publications more often than expected under a publication-year-stratified null?
+\end{enumerate}
+
+The first two questions are publication-level association questions; the third is a relational-level question. All analyses are associational and descriptive. They do not identify causal mechanisms, institutional intention, funding decisions, policy impact, endorsement, or topical affinity.
+
+\subsection{Data Source and Two-Stage Publication Construction}
+
+Data were retrieved from the Dimensions Analytics API. The first stage was a candidate publication query restricted to articles and reviews from 2000--2025. The query required one AI/ML expression (``artificial intelligence,'' ``machine learning,'' ``deep learning,'' ``neural network,'' ``large language model,'' or ``LLM'') and one core mental-health expression (``mental health,'' ``mental illness,'' ``psychiatry,'' ``psychiatric,'' ``psychotherapy,'' ``psychotherapeutic,'' ``mental disorder,'' or ``psychiatric disorder''). This candidate retrieval returned 13,574 publications.
+
+A second, deterministic local screen was then applied to the returned title and available abstract fields. A publication was retained in $P$ only if at least one approved AI/ML phrase and at least one approved core mental-health phrase were explicitly present in its own title or available abstract. The screen was introduced as a quality safeguard because Dimensions title/abstract retrieval may return related matches beyond the literal keyword forms intended in the initial query. For every candidate record, we retained the record identifier, title, matched AI/ML phrase(s), matched mental-health phrase(s), and retain/exclude decision. The screen retained 11,102 publications and excluded 2,472. A record-level audit reproduced every saved retain/exclude decision from the saved matched-term fields, with zero mismatches. No manual inclusion decisions or outcome information entered this screen. All 11,102 publications in $P$ have titles; 10,766 (96.97\%) also have abstracts. The remaining 336 publications were retained because their titles contained explicit qualifying evidence.
+
+\maybefigure{H}{figures/figure_1_study_design.pdf}{Two-stage construction of the publication anchor and Dimensions-recorded relational system. $P$ denotes publications in the anchor, $G$ linked grants, $D$ linked policy documents, and $I$ recorded policy-document issuers. The raw relations are $P$--$G$, $P$--$D$, and $D$--$I$. Policy-document records are heterogeneous linkage records; a $P$--$D$ relation is not evidence of topical similarity, endorsement, or policy impact.}
+
+\subsection{Linked Grants, Policy Documents, and Relation Construction}
+
+Grants were retrieved only from identifiers recorded in $P$ \texttt{supporting\_grant\_ids}; policy documents were retrieved only where Dimensions \texttt{publication\_ids} contained a $P$ identifier. The resulting linked dataset contains 3,983 grants and 255 policy documents. All three record types were deduplicated by Dimensions identifier and audited for date-window compliance and required fields.
+
+The $P$--$G$ edge list includes 5,898 unique recorded ties involving 1,974 publications and 3,983 grants. The $P$--$D$ edge list includes 361 unique recorded ties involving 212 publications and 255 policy documents. We retained only \texttt{publication\_ids} intersecting $P$; policy documents also cite many publications outside the anchor and those external citations were excluded from the relation. The $D$--$I$ relation attaches the recorded publisher organization to each policy document. All 255 retained policy documents had a valid issuer identifier, yielding 55 issuer organizations and 272 weighted issuer--publication pairs after repeated issuer--publication paths were collapsed.
+
+\begin{table}[H]
+\centering
+\caption{Publication-anchored record system and observed relations.}
+\label{tab:record-system}
+\begin{tabular}{lrr}
+\toprule
+Entity or relation & Count & Notes \\
+\midrule
+Publications in the anchor ($P$) & 11,102 & Locally text-verified \\
+Linked grants ($G$) & 3,983 & Retrieved from $P$ \texttt{supporting\_grant\_ids} \\
+Linked policy documents ($D$) & 255 & Retrieved through $D$ \texttt{publication\_ids} intersecting $P$ \\
+Policy issuers ($I$) & 55 & Recorded publisher organizations \\
+$P$--$G$ ties & 5,898 & 1,974 connected $P$ nodes \\
+$P$--$D$ ties & 361 & 212 connected $P$ nodes \\
+Issuer--$P$ weighted pairs & 272 & Derived from $P$--$D$ and $D$--$I$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Publication Indicators and Supplementary Topic Descriptors}
+
+The primary ethics/responsibility indicator matched the following explicit expressions in publication titles plus available abstracts: \texttt{ethic*}, fairness, algorithmic bias, bias mitigation, \texttt{explainab*}, \texttt{interpretab*}, \texttt{transparen*}, \texttt{accountab*}, responsible AI, responsible artificial intelligence, trustworthy AI, AI governance, algorithmic governance, AI regulation, algorithmic regulation, data privacy, privacy-preserving, informed consent, health equity, and human rights. The primary computational-performance indicator used a deliberately narrow dictionary: model performance, predictive performance, classification performance, predictive accuracy, model accuracy, area under the curve, ROC-AUC, receiver operating characteristic, cross-validation, and external validation. Indicators were non-exclusive.
+
+We pre-specified a narrower ethics/responsibility dictionary and an expanded computational-performance dictionary for robustness analysis. The narrower ethics dictionary retained 2,004 of 2,159 primary ethics/responsibility matches (Jaccard overlap 0.928). The expanded computational dictionary substantially altered the set of identified publications and was therefore used only as a sensitivity definition, not as the primary performance measure.
+
+Dimensions concepts and concept relevance scores were used only to construct four non-exclusive, supplementary topic-family descriptors: mental-health conditions/symptoms, clinical assessment/diagnosis, treatment/intervention, and neurocognitive/affective processes. Concept pairs were deduplicated at their maximum relevance score; primary pairs required relevance $\geq 0.40$ and excluded generic labels. The conditions/symptoms family used named conditions and symptoms only, and the assessment/diagnosis family excluded standalone ``assessment.'' We did not use individual concept labels as outcome predictors or as cross-layer topic labels.
+
+\maybefigure{H}{figures/figure_2_text_indicators.pdf}{Primary non-exclusive publication text indicators in $P$. The narrow computational-performance dictionary is the primary specification; expanded computational terms are used only in robustness analyses.}
+
+\subsection{Publication-Level Association Models}
+
+For each publication, we defined binary indicators for at least one $P$--$G$ tie and at least one $P$--$D$ tie, and estimated separate logistic regressions with HC3 robust standard errors. Primary predictors were the ethics/responsibility and narrow computational-performance indicators. Covariates were publication year (centered), $\log(1+\text{times cited})$, and the four supplementary topic-family descriptors.
+
+For interpretive clarity, recorded grant linkage is treated as an attribute of a publication's recorded institutional context, not as a temporally subsequent outcome. Grant start dates commonly precede publication dates, and the data do not observe the funding decision or a complete funding-to-publication sequence. The grant-link model used all 11,102 publications in $P$.
+
+Recorded policy-document linkage is citation/linkage based, and recent publications have had less opportunity to be represented in later policy records. The primary policy analysis therefore used a prespecified publication-age eligibility sample restricted to publications through 2021, allowing policy-document linkage to be observed through the 2025 policy-data endpoint ($n=2,271$; 147 policy-linked publications). A more restrictive through-2020 eligibility sample ($n=1,550$; 120 policy-linked publications) provided a robustness analysis with a longer policy-observation window. This restriction reduces, but does not eliminate, unequal observation opportunity across publication years. The all-years policy model was retained only as a citation-window sensitivity analysis.
+
+Targeted sensitivity analyses repeated the principal grant and policy models among publications with an available abstract, omitted citation adjustment, and used a cubic B-spline for publication year. The citation-omitted models estimate a different conditional association because citations may be a visibility measure and part of the pathway through which linked policy documents encounter publications; they are therefore reported as sensitivity analyses, not replacements for the principal models. Firth penalized-logistic models repeated the linear-year, citation-adjusted policy specifications as a rare-outcome sensitivity. We report convergence, separation-screening, influence, variance-inflation, and standardized model-based probability-contrast diagnostics in the Supplementary Materials.
+
+\subsection{Record-Year Differences and Local Cross-Relation Configurations}
+
+For every observed relation, we calculated record-year differences: grant start year minus publication year for $P$--$G$, and policy-document year minus publication year for $P$--$D$. These are record-date differences, not causal lags or measures of knowledge translation.
+
+To test local cross-relation alignment, each publication in $P$ was classified as $P$--$G$ only, $P$--$D$ only, both, or neither. The primary null held the $P$--$G$ relation fixed and reassigned each publication's complete $P$--$D$ incidence profile to a randomly selected publication in $P$ within the same publication-year stratum. Within each stratum, the reassignment was a one-to-one random permutation: every complete $P$--$D$ profile was used exactly once, and singleton strata remained fixed. Thus, all policy-document ties incident to a source publication moved together; the procedure preserved the within-year multiset of $P$--$D$ degrees, policy-document endpoints, and recorded issuer attributions while disrupting observed $P$--$G$/$P$--$D$ alignment on the same publications. We ran 1,000 permutations with NumPy random seed 20260902. The two primary statistics were the number of publications with both relation types, $N_{\mathrm{both}}$, and the intensive-margin degree-product statistic,
+\[
+\sum_p d_{PG}(p)d_{PD}(p).
+\]
+For each statistic $T$, the two-sided empirical $p$ value was $\min\{1,2\min[(1+\#\{T_b\geq T_{obs}\})/(B+1),(1+\#\{T_b\leq T_{obs}\})/(B+1)]\}$, where $B=1{,}000$. An unrestricted reassignment of the $P$ end of $P$--$D$ ties served as a sensitivity null. Issuer reach and text indicators were supplementary characterizations; neither entered the primary permutation.
+
+\section{Results}
+
+\subsection{Indicator Prevalence}
+
+Of the 11,102 publications in $P$, 2,159 (19.45\%) carried the primary ethics/responsibility indicator and 1,482 (13.35\%) carried the narrow computational-performance indicator. The indicators overlapped in 274 publications (2.47\%); 7,735 publications (69.67\%) carried neither indicator. The ethics/responsibility composite was chiefly represented by the general ethics term family (1,305 publications; 11.75\%) and the explainability, interpretability, transparency, and accountability family (989; 8.91\%); these descriptive, non-exclusive subfamilies were not used as post-hoc association predictors (Supplementary Table S6). The four supplementary topic families were non-exclusive: 4,133 publications (37.23\%) were associated with named mental-health conditions/symptoms, 2,343 (21.10\%) with clinical assessment/diagnosis, 3,349 (30.17\%) with treatment/intervention, and 2,561 (23.07\%) with neurocognitive/affective processes.
+
+\subsection{Recorded Grant Linkage}
+
+A total of 1,974 publications in $P$ (17.78\%) had at least one recorded grant linkage. In the adjusted grant model, the ethics/responsibility indicator was negatively associated with grant linkage (odds ratio [OR] 0.737; 95\% confidence interval [CI] 0.638--0.852; $p<.001$). The narrow computational-performance indicator was positively associated with grant linkage (OR 1.502; 95\% CI 1.303--1.732; $p<.001$). The conditions/symptoms and treatment/intervention descriptors were also positively associated with grant linkage, but they are supplementary covariates rather than headline findings.
+
+The dictionary robustness analyses retained the central indicator conclusions. Across all pre-specified specifications, ethics/responsibility language remained negatively associated with grant linkage (OR 0.688--0.737; all $p<.001$), and computational-performance language remained positively associated with grant linkage (OR 1.224--1.502; all $p<.001$). Targeted checks gave the same conclusion: in abstract-available, citation-omitted, flexible-year, and grant-start-on-or-before-publication specifications, ethics/responsibility ORs ranged from 0.734 to 0.784 and computational-performance ORs from 1.493 to 1.561 (all $p<.001$; Supplementary Table S2).
+
+\subsection{Recorded Policy-Document Linkage}
+
+Only 212 publications in $P$ (1.91\%) had at least one recorded policy-document linkage in the all-years data. The all-years policy model is strongly affected by publication age and citation opportunity and is therefore not interpreted as primary evidence. In the primary through-2021 publication-age eligibility analysis, the ethics/responsibility indicator was positively associated with recorded policy-document linkage (OR 1.997; 95\% CI 1.196--3.334; $p=.008$). The more restrictive through-2020 eligibility analysis showed the same direction (OR 2.668; 95\% CI 1.460--4.876; $p=.001$). Computational-performance language was not associated with policy-document linkage in either eligibility analysis (OR 0.736; 95\% CI 0.413--1.312; $p=.298$ through 2021; OR 0.961; 95\% CI 0.512--1.805; $p=.902$ through 2020).
+
+The ethics/responsibility result persisted across all pre-specified dictionary specifications and both policy-observation eligibility samples (OR 1.776--2.794; all $p\leq .038$). Targeted checks were concordant. The through-2021 ethics/responsibility OR was 1.999 in the abstract-available analysis, 2.339 without citation adjustment, 2.113 with flexible publication year, and 2.010 in the Firth sensitivity; the corresponding through-2020 values were 2.678, 2.969, 2.758, and 2.673. Computational-performance language remained statistically unsupported in every targeted policy specification (Supplementary Tables S2 and S3). In the primary through-2021 model, the standardized model-based predicted policy-linkage probability was 6.0\% when the ethics/responsibility indicator was set to 0 and 10.2\% when set to 1, a difference of 4.2 percentage points with all other observed covariates retained (Supplementary Table S5). These estimates describe conditional associations in Dimensions-recorded links and should not be interpreted as policy impact or institutional endorsement.
+
+\begin{table}[H]
+\centering
+\caption{Primary and robustness policy-document linkage associations.}
+\label{tab:policy-eligibility}
+\begin{tabular}{llrrr}
+\toprule
+Eligibility sample & Indicator & OR & 95\% CI & $p$ \\
+\midrule
+Through 2021 & Ethics/responsibility & 1.997 & 1.196--3.334 & .008 \\
+Through 2021 & Computational performance & 0.736 & 0.413--1.312 & .298 \\
+Through 2020 & Ethics/responsibility & 2.668 & 1.460--4.876 & .001 \\
+Through 2020 & Computational performance & 0.961 & 0.512--1.805 & .902 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize Notes: The through-2021 sample is the primary publication-age eligibility analysis ($n=2,271$; 147 linked publications); the through-2020 sample is the more restrictive robustness analysis ($n=1,550$; 120 linked publications). Each model adjusts for centered publication year, log citations, and the four supplementary topic-family descriptors.
+\end{flushleft}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\IfFileExists{figures/figure_3_adjusted_associations.pdf}{\includegraphics[width=\linewidth]{figures/figure_3_adjusted_associations.pdf}}{\fbox{\parbox[c][2.4in][c]{0.92\linewidth}{\centering Figure file pending: \texttt{figures/figure_3_adjusted_associations.pdf}}}}
+\caption{Adjusted associations of the primary publication indicators with recorded grant and policy-document links. Panel A uses all publications in $P$ for grant linkage. Panels B and C show the primary through-2021 and more restrictive through-2020 publication-age eligibility analyses for policy-document linkage. All models adjust for publication year, log citations, and supplementary topic-family descriptors. Points show odds ratios and bars show 95\% confidence intervals.}
+\label{fig:policy-associations}
+\end{figure}
+
+\subsection{Record-Year Ordering}
+
+Among 5,898 $P$--$G$ ties, 5,662 (96.0\%) had a grant start year earlier than the linked publication year; the median record-year difference was $-4$ years. Grant records therefore cannot be interpreted as a simple post-publication funding outcome. Among 361 $P$--$D$ ties, 326 (90.3\%) had a later policy-document year, 33 had the same year, and two had an earlier year; the median difference was $+2$ years (interquartile range 1--3 years among nonnegative differences). This describes temporal ordering of database records only.
+
+\maybefigure{H}{figures/figure_4_temporal_ordering.pdf}{Record-year ordering of grant and policy-document records relative to linked publication years. Bars show the percentage of ties in each relation; total ties and median record-year differences are annotated. Record-year differences are not causal lags or evidence of policy impact. Policy-association estimates for the through-2021 primary and more restrictive through-2020 publication-age eligibility samples are shown in Figure~\ref{fig:policy-associations} and Table~\ref{tab:policy-eligibility}.}
+
+\subsection{Local Alignment of Grant and Policy-Document Relations}
+
+The observed cross-relation configurations were 1,876 $P$--$G$-only publications, 114 $P$--$D$-only publications, 98 publications with both relation types, and 9,014 publications with neither. Thus, joint connectivity was rare in absolute terms: 98 of 11,102 publications in $P$ (0.88\%).
+
+The year-stratified permutation test nevertheless showed alignment at two distinct margins relative to the opportunity-conditioned null. At the extensive margin, the observed $N_{\mathrm{both}}=98$ exceeded the null mean of 61.805 (95\% null interval 50--75), yielding enrichment of 1.586, a one-sided upper-tail permutation $p=.001$, and a two-sided permutation $p=.002$. At the intensive margin, the degree-product statistic was 696, compared with a null mean of 318.128 (95\% interval 197.95--518.10), yielding enrichment of 2.188 and a two-sided permutation $p=.004$. Thus, joint connectivity was more frequent than expected, and the observed grant and policy-document degrees were disproportionately concentrated on the same publications. The unrestricted sensitivity null showed still stronger enrichment, as expected when publication-year opportunity is not controlled.
+
+The intensive result was not dependent on the highest degree-product contributor. After removing that publication, $N_{\mathrm{both}}=97$ versus a null mean of 61.052 (enrichment 1.589; two-sided $p=.002$), and the degree-product statistic was 566 versus 297.389 (enrichment 1.903; two-sided $p=.010$; Supplementary Table S8).
+
+The jointly connected publications had a mean of 3.57 grant links and 1.88 policy-document links. Their aggregate publication-level distinct issuer count was higher than the primary null expectation, but this reflected the greater number of jointly connected publications. Conditional measures did not show unusually broad issuer reach: the mean distinct issuer count was 1.357 versus a null mean of 1.296 (two-sided $p=.531$), and distinct issuers per policy-document link did not differ from the null (two-sided $p=.262$). We therefore do not infer enhanced issuer diversity.
+
+\maybefigure{H}{figures/figure_5_cross_relation_alignment.pdf}{Local alignment of recorded grant and policy-document relations. Panel A shows the four observed publication configurations. Panels B and C compare the observed extensive- and intensive-margin alignment statistics with the primary publication-year-stratified permutation null. The null holds $P$--$G$ fixed and reassigns complete $P$--$D$ incidence profiles within publication-year strata.}
+
+\subsection{Two-Mode Structure and Policy-Issuer Representation}
+
+Both two-mode relations were highly fragmented. The $P$--$G$ relation contained 1,137 connected components, with the largest component accounting for 27.6\% of connected nodes. The $P$--$D$ relation contained 125 components, with the largest accounting for 14.3\% of connected nodes. This fragmentation motivates analysis of local cross-relation configurations rather than a whole-system connectivity structure.
+
+By contrast, issuer representation was concentrated. The top six of 55 issuer organizations accounted for 63.4\% of weighted issuer--publication links. The largest issuers by distinct linked publications were the Canadian Agency for Drugs and Technologies in Health (38), the Publications Office of the European Union (35), the U.S. Centers for Disease Control and Prevention (31), the World Health Organization (27), and the Organisation for Economic Co-operation and Development (18). These values identify recorded publisher organizations of linked policy documents; they do not establish influence, intentional selection, or endorsement.
+
+\maybefigure{H}{figures/figure_6_policy_issuer_representation.pdf}{Policy-issuer representation in recorded $P$--$D$--$I$ paths. Bars show distinct publications in $P$ linked through policy documents attributed to the ten highest-ranked issuers. Issuer attributes are descriptive database annotations, not indicators of endorsement or influence.}
+
+\section{Discussion}
+
+This study provides a publication-anchored account of ethics, computation, and institutional linkages in AI-and-mental-health research. Its central result is a combination of differentiated publication-level associations and non-random local alignment between two recorded relation types.
+
+At the publication level, explicit ethics/responsibility and computational-performance language had different relational signatures. Ethics/responsibility language was negatively associated with recorded grant linkage but positively associated with policy-document linkage in the publication-age eligibility analyses. Computational-performance language was positively associated with grant linkage and had no adjusted association with policy-document linkage. These patterns suggest that funding-linked and policy-linked visibility are not interchangeable institutional dimensions of AI-and-mental-health research: the two explicit publication-language indicators are differently represented across the recorded relations.
+
+Several candidate explanations are consistent with, but not established by, these patterns. Computational-evaluation language may be more common in grant-supported empirical studies; the grant pattern may also reflect disciplinary composition, grant-acknowledgement practices, or the historical development of technical and responsible-AI vocabularies. Policy documents may give greater attention to privacy, fairness, governance, safety, accountability, or rights, and Dimensions coverage may preferentially represent organizations that publish on health technology assessment or governance. These are possibilities for further investigation, not findings of the present analysis.
+
+Interpretation nevertheless requires restraint. Grant linkage is an attribute of a publication's recorded institutional context rather than a post-publication outcome; grant start dates commonly precede publication dates, and the available data do not identify proposal-level decisions or funding decisions. Policy-document linkage is rare and is observed only where a heterogeneous Dimensions policy document contains the publication identifier. The consistent positive ethics/responsibility association in the through-2021 primary and through-2020 robustness eligibility samples therefore concerns recorded representation in policy-document links after allowing additional policy-observation time. It is not evidence of policy uptake, policy impact, endorsement, or the content of a policy document.
+
+The configuration analysis adds a distinct relational result that cannot be obtained from the logistic models. Grant and policy-document ties were aligned on the same publications more often than expected after conditioning on publication year. At the extensive margin, there were more publications with both relation types than expected; at the intensive margin, high grant and policy-document degrees were disproportionately concentrated on the same publications. Together, these results indicate non-random local intersection between the two Dimensions-recorded relations. They do not identify a causal pathway from grant support to policy documents or imply coordination by any actor.
+
+Both two-mode relations were fragmented, which underscores the value of examining local configurations rather than inferring a single whole-system connectivity structure. Policy-issuer representation is reported as descriptive organizational context for the recorded $D$--$I$ relation, not as a further inferential finding. The paper's contribution is consequently neither a claim about institutional intentions nor a general account of research-to-policy processes. It is a transparent description of how explicit publication language, recorded grant linkage, and recorded policy-document linkage are patterned in one publication-anchored record system.
+
+\section{Limitations}
+
+Several limitations should guide interpretation. The two-stage publication construction improves transparency but does not establish a perfectly exhaustive or perfectly pure universe of AI-and-mental-health research. The local screen and the dictionaries are English-language procedures applied to titles and available abstracts; records without English-language searchable text may be underrepresented. Dimensions language and title-language metadata were not returned in the publication file, so the language composition of the publication anchor cannot be quantified (Supplementary Table S9). The local screen works only with titles and available abstracts, and 336 retained publications lack abstracts. The dictionaries capture explicit language, not all substantive ethical or computational content, and can produce both false-positive and false-negative matches. Topic-family descriptors are supplementary and non-exclusive; they do not exhaust publication topics.
+
+The relational system is specifically the linkage structure recorded by Dimensions; a different bibliographic or policy database could provide different coverage. Grant and policy-document links depend on metadata availability, identifier extraction, source coverage, and database reconciliation. Thus, the outcomes are both incomplete representations of real-world relations and products of a specific database-linking process. Dimensions-recorded grant links may not capture all support, and the timing of grants versus publications precludes a simple outcome narrative. Policy documents are heterogeneous and can connect to publications without topical affinity; conversely, absence of a Dimensions policy-document link is not evidence of absence of policy use, relevance, influence, or citation elsewhere.
+
+The policy eligibility restriction reduces but does not eliminate unequal observation opportunity. The adjusted logistic models control for publication year, citations, and four broad topic-family descriptors, but other publication characteristics associated with both explicit language and recorded linkage remain unobserved. Moreover, citations may be both a visibility measure and part of the pathway through which policy documents encounter publications. Multiple publications can also be linked to the same grant or policy document, producing relational dependence not fully addressed by HC3 standard errors. The odds ratios should therefore not be interpreted as estimates of an independent effect of ethics/responsibility or computational-performance language. Finally, issuer attributes identify recorded publishers, not authorship, institutional preferences, or policy authority.
+
+\section{Conclusion}
+
+A transparent publication-anchored design makes it possible to study AI-and-mental-health research across recorded grant and policy-document links without treating independently retrieved collections as a linked system. The findings reveal two complementary relational patterns. First, ethics/responsibility and computational-performance language have different conditional associations with recorded grant and policy-document linkage. Second, grant and policy-document ties co-occur on more publications than expected under the publication-year-conditioned null, while their degrees are also disproportionately concentrated on the same publications. These findings characterize observed Dimensions-recorded linkages and their local intersection; they do not establish causality, policy impact, endorsement, or intentional selection.
+
+\section*{Supplementary Materials}
+The supplementary materials provide full coefficient tables, model diagnostics, standardized probability contrasts, dictionary-composition tables, the grant-degree distribution, the highest-contributor deletion sensitivity, language-metadata availability, and a record-level audit of the two-stage screening decisions. A repository-ready guide specifies the retrieval, screening, linkage, code, and derived-output materials required for reproducibility.
+
+\section*{Data Availability}
+Reproducibility materials are available at \textbf{[INSERT REPOSITORY DOI OR BLINDED REVIEW URL BEFORE SUBMISSION]}. The repository must contain the exact retrieval specification and run metadata, local screening decisions and codebook, indicator and topic-family dictionaries, relation-construction and analysis code, derived aggregate outputs, and reconstruction instructions for authorized Dimensions users. Raw Dimensions records should not be redistributed where restricted by the Dimensions data-use agreement.
+
+\section*{Conflict of Interest}
+The authors declare no conflict of interest.
+
+\section*{Author Contributions}
+Moses Boudourides conceived the study, conducted the computational analyses, and drafted the manuscript. Niko M{\"a}nnikk{\"o} contributed to study development, interpretation, and manuscript revision. Both authors approved the final version.
+
+\section*{Acknowledgments}
+The authors thank collaborators who contributed to methodological discussion and data-audit procedures.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
