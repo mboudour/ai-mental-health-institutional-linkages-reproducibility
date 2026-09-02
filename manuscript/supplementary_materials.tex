@@ -1,40 +1,40 @@
-\\documentclass[11pt]{article}
-\\usepackage[margin=1in]{geometry}
-\\usepackage{booktabs,longtable,array}
-\\usepackage[T1]{fontenc}
-\\usepackage[utf8]{inputenc}
-\\usepackage{amsmath}
-\\usepackage{caption}
-\\setlength{\\LTleft}{0pt}
-\\setlength{\\LTright}{0pt}
-\\begin{document}
-\\begin{center}
-{\\Large Supplementary Materials}\\\\[0.5em]
-{\\large Ethics, Computation, and Institutional Linkages in AI and Mental-Health Research}
-\\end{center}
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs,longtable,array}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{caption}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\begin{document}
+\begin{center}
+{\Large Supplementary Materials}\\[0.5em]
+{\large Ethics, Computation, and Institutional Linkages in AI and Mental-Health Research}
+\end{center}
 
-\\section*{Supplementary Methods}
-The primary association models are binomial logistic regressions with HC3 robust standard errors. Their covariates are the two primary publication-language indicators, four non-exclusive supplementary topic-family descriptors, centered publication year, and $\\log(1+\\text{times cited})$. Policy-linkage models are restricted to publications through 2021 for the primary eligibility analysis and through 2020 for the more restrictive robustness analysis. The complete-case analyses retain records with an available abstract. Citation-omitted and flexible-year specifications are sensitivity analyses that estimate different conditional associations from the primary model. Flexible year is represented by a cubic B-spline with four degrees of freedom.
+\section*{Supplementary Methods}
+The primary association models are binomial logistic regressions with HC3 robust standard errors. Their covariates are the two primary publication-language indicators, four non-exclusive supplementary topic-family descriptors, centered publication year, and $\log(1+\text{times cited})$. Policy-linkage models are restricted to publications through 2021 for the primary eligibility analysis and through 2020 for the more restrictive robustness analysis. The complete-case analyses retain records with an available abstract. Citation-omitted and flexible-year specifications are sensitivity analyses that estimate different conditional associations from the primary model. Flexible year is represented by a cubic B-spline with four degrees of freedom.
 
 Firth penalized-logistic models repeat the primary linear-year, citation-adjusted policy specifications. The Firth estimates use inverse expected Fisher information and model-based Wald intervals; they are a rare-outcome sensitivity and do not replace the HC3-robust primary estimates. For the cross-relation alignment test, each permutation is a one-to-one reassignment of complete $P$--$D$ incidence profiles within publication-year strata. Every profile is used once per permutation, strata with one publication remain fixed, and $P$--$G$ ties, policy-document endpoints, and issuer attributions are retained. The random seed is 20260902; two-sided empirical $p$ values use the plus-one correction described in the main text.
 
-\\section*{Supplementary Results}
-\\begin{longtable}{p{4.0cm}p{4.0cm}rrrr}
-\\caption{Full adjusted association models.}\\label{tab:s1-full-models}\\\\
-\\toprule
+\section*{Supplementary Results}
+\begin{longtable}{p{4.0cm}p{4.0cm}rrrr}
+\caption{Full adjusted association models.}\label{tab:s1-full-models}\\\
+\toprule
 Model & Term & Log odds & Robust SE & OR (95\% CI) & $p$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{6}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Model & Term & Log odds & Robust SE & OR (95\% CI) & $p$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{6}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Grant linkage: primary & Intercept & -2.885 & 0.059 & 0.06 (0.05--0.06) & $<.001$ \\
 Grant linkage: primary & Ethics/responsibility indicator & -0.305 & 0.074 & 0.74 (0.64--0.85) & $<.001$ \\
 Grant linkage: primary & Computational-performance indicator & 0.407 & 0.073 & 1.50 (1.30--1.73) & $<.001$ \\
@@ -62,26 +62,26 @@ Policy linkage: through 2020 & Treatment/intervention & 0.064 & 0.225 & 1.07 (0.
 Policy linkage: through 2020 & Neurocognitive/affective & -0.398 & 0.307 & 0.67 (0.37--1.23) & .194 \\
 Policy linkage: through 2020 & Publication year (centered) & 0.079 & 0.035 & 1.08 (1.01--1.16) & .025 \\
 Policy linkage: through 2020 & Log(1 + citations) & 1.138 & 0.105 & 3.12 (2.54--3.83) & $<.001$ \\
-\\end{longtable}
+\end{longtable}
 
-\\noindent\\small Note: Policy models have 147 events among 2,271 publications through 2021 and 120 events among 1,550 publications through 2020. OR = odds ratio; CI = confidence interval.
+\noindent\small Note: Policy models have 147 events among 2,271 publications through 2021 and 120 events among 1,550 publications through 2020. OR = odds ratio; CI = confidence interval.
 
-\\begin{longtable}{p{5.0cm}p{4.0cm}rr}
-\\caption{Targeted sensitivity analyses for the focal indicators.}\\label{tab:s2-focal-sensitivities}\\\\
-\\toprule
+\begin{longtable}{p{5.0cm}p{4.0cm}rr}
+\caption{Targeted sensitivity analyses for the focal indicators.}\label{tab:s2-focal-sensitivities}\\\
+\toprule
 Specification & Indicator & OR (95\% CI) & $p$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{4}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Specification & Indicator & OR (95\% CI) & $p$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{4}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Grant linkage: primary & Ethics/responsibility indicator & 0.74 (0.64--0.85) & $<.001$ \\
 Grant linkage: primary & Computational-performance indicator & 1.50 (1.30--1.73) & $<.001$ \\
 Grant linkage: abstract available & Ethics/responsibility indicator & 0.73 (0.64--0.85) & $<.001$ \\
@@ -108,46 +108,46 @@ Policy linkage: through 2021, flexible year & Ethics/responsibility indicator & 
 Policy linkage: through 2021, flexible year & Computational-performance indicator & 0.77 (0.43--1.35) & .357 \\
 Policy linkage: through 2020, flexible year & Ethics/responsibility indicator & 2.76 (1.48--5.14) & .001 \\
 Policy linkage: through 2020, flexible year & Computational-performance indicator & 0.97 (0.52--1.80) & .913 \\
-\\end{longtable}
+\end{longtable}
 
-\\begin{longtable}{p{4.5cm}p{4.0cm}rr}
-\\caption{Firth penalized-logistic sensitivity results for policy-document linkage.}\\label{tab:s3-firth}\\\\
-\\toprule
+\begin{longtable}{p{4.5cm}p{4.0cm}rr}
+\caption{Firth penalized-logistic sensitivity results for policy-document linkage.}\label{tab:s3-firth}\\\
+\toprule
 Specification & Indicator & OR (95\% CI) & $p$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{4}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Specification & Indicator & OR (95\% CI) & $p$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{4}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Policy linkage: through 2021, Firth & Ethics/responsibility indicator & 2.01 (1.21--3.35) & .007 \\
 Policy linkage: through 2021, Firth & Computational-performance indicator & 0.75 (0.43--1.30) & .306 \\
 Policy linkage: through 2020, Firth & Ethics/responsibility indicator & 2.67 (1.47--4.85) & .001 \\
 Policy linkage: through 2020, Firth & Computational-performance indicator & 0.98 (0.54--1.79) & .945 \\
-\\end{longtable}
+\end{longtable}
 
-\\begin{longtable}{p{5.1cm}rrrrrr}
-\\caption{Model diagnostics for principal and policy sensitivity models.}\\label{tab:s4-diagnostics}\\\\
-\\toprule
+\begin{longtable}{p{5.1cm}rrrrrr}
+\caption{Model diagnostics for principal and policy sensitivity models.}\label{tab:s4-diagnostics}\\\
+\toprule
 Model & $n$ & Events & AIC & McFadden $R^2$ & Min. fitted $p$ & Max. fitted $p$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{7}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{7}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Model & $n$ & Events & AIC & McFadden $R^2$ & Min. fitted $p$ & Max. fitted $p$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{7}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{7}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Grant linkage: primary & 11,102 & 1,974 & 9254.5 & 0.111 & 0.0366 & 0.8100 \\
 Policy linkage: through 2021 & 2,271 & 147 & 850.5 & 0.236 & 0.0003 & 0.8083 \\
 Policy linkage: through 2020 & 1,550 & 120 & 642.7 & 0.260 & 0.0001 & 0.8942 \\
@@ -157,78 +157,78 @@ Policy linkage: through 2021, no citations & 2,271 & 147 & 1083.6 & 0.020 & 0.02
 Policy linkage: through 2020, no citations & 1,550 & 120 & 824.9 & 0.042 & 0.0153 & 0.3105 \\
 Policy linkage: through 2021, flexible year & 2,271 & 147 & 845.4 & 0.246 & 0.0001 & 0.8397 \\
 Policy linkage: through 2020, flexible year & 1,550 & 120 & 639.1 & 0.272 & 0.0001 & 0.9316 \\
-\\end{longtable}
+\end{longtable}
 
-\\noindent\\small Note: All listed binomial GLM models converged. No perfect-separation or convergence warning was emitted. Fitted-probability extrema are screening diagnostics; they do not prove the absence of quasi-separation.
+\noindent\small Note: All listed binomial GLM models converged. No perfect-separation or convergence warning was emitted. Fitted-probability extrema are screening diagnostics; they do not prove the absence of quasi-separation.
 
-\\begin{longtable}{p{4.5cm}p{3.9cm}rrr}
-\\caption{Standardized model-based probability contrasts for focal indicators.}\\label{tab:s5-probability-contrasts}\\\\
-\\toprule
+\begin{longtable}{p{4.5cm}p{3.9cm}rrr}
+\caption{Standardized model-based probability contrasts for focal indicators.}\label{tab:s5-probability-contrasts}\\\
+\toprule
 Model & Indicator & Indicator = 0 & Indicator = 1 & Difference \\
-\\midrule
-\\endfirsthead
-\\multicolumn{5}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Model & Indicator & Indicator = 0 & Indicator = 1 & Difference \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{5}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Grant linkage: primary & Ethics/responsibility indicator & 18.5\% & 14.7\% & -3.8 pp \\
 Grant linkage: primary & Computational-performance indicator & 16.9\% & 22.6\% & +5.7 pp \\
 Policy linkage: through 2021 & Ethics/responsibility indicator & 6.0\% & 10.2\% & +4.2 pp \\
 Policy linkage: through 2021 & Computational-performance indicator & 6.7\% & 5.2\% & -1.5 pp \\
 Policy linkage: through 2020 & Ethics/responsibility indicator & 7.1\% & 14.2\% & +7.1 pp \\
 Policy linkage: through 2020 & Computational-performance indicator & 7.8\% & 7.5\% & -0.2 pp \\
-\\end{longtable}
+\end{longtable}
 
-\\noindent\\small Note: For each contrast, one focal indicator is set to 0 and then 1 for all publications while the remaining observed covariates are retained. These are model-based standardized contrasts, not causal effects.
+\noindent\small Note: For each contrast, one focal indicator is set to 0 and then 1 for all publications while the remaining observed covariates are retained. These are model-based standardized contrasts, not causal effects.
 
-\\begin{longtable}{p{5.0cm}p{5.4cm}rr}
-\\caption{Descriptive composition of the primary ethics/responsibility dictionary.}\\label{tab:s6-ethics-composition}\\\\
-\\toprule
+\begin{longtable}{p{5.0cm}p{5.4cm}rr}
+\caption{Descriptive composition of the primary ethics/responsibility dictionary.}\label{tab:s6-ethics-composition}\\\
+\toprule
 Subfamily & Component terms & Publications & Share of $P$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{4}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Subfamily & Component terms & Publications & Share of $P$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{4}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Ethics (general) & ethic* & 1,305 & 11.75\% \\
 Fairness and bias & algorithmic bias; bias mitigation; fairness & 215 & 1.94\% \\
 Explainability, interpretability, transparency, and accountability & accountab*; explainab*; interpretab*; transparen* & 989 & 8.91\% \\
 Privacy and consent & data privacy; informed consent; privacy-preserving & 370 & 3.33\% \\
 Responsibility, governance, and regulation & AI governance; AI regulation; algorithmic governance; algorithmic regulation; responsible AI; responsible artificial intelligence; trustworthy AI & 55 & 0.50\% \\
 Equity and rights & health equity; human rights & 48 & 0.43\% \\
-\\end{longtable}
+\end{longtable}
 
-\\noindent\\small Note: Subfamilies are non-exclusive descriptive groupings. They were not entered as post-hoc association predictors.
+\noindent\small Note: Subfamilies are non-exclusive descriptive groupings. They were not entered as post-hoc association predictors.
 
-\\begin{longtable}{rrr}
-\\caption{Publication-level distribution of recorded grant-link counts.}\\label{tab:s7-grant-degree}\\\\
-\\toprule
+\begin{longtable}{rrr}
+\caption{Publication-level distribution of recorded grant-link counts.}\label{tab:s7-grant-degree}\\\
+\toprule
 Recorded grant links & Publications & Share of all publications \\
-\\midrule
-\\endfirsthead
-\\multicolumn{3}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Recorded grant links & Publications & Share of all publications \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{3}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 0 & 9,128 & 82.22\% \\
 1 & 855 & 7.70\% \\
 2 & 437 & 3.94\% \\
@@ -261,138 +261,138 @@ Recorded grant links & Publications & Share of all publications \\
 35 & 1 & 0.01\% \\
 39 & 1 & 0.01\% \\
 42 & 2 & 0.02\% \\
-\\end{longtable}
+\end{longtable}
 
-\\begin{longtable}{p{4.6cm}p{3.3cm}rrrr}
-\\caption{Highest-contributor deletion sensitivity for local alignment.}\\label{tab:s8-hub-deletion}\\\\
-\\toprule
+\begin{longtable}{p{4.6cm}p{3.3cm}rrrr}
+\caption{Highest-contributor deletion sensitivity for local alignment.}\label{tab:s8-hub-deletion}\\\
+\toprule
 Analysis & Statistic & Observed & Null mean & Enrichment & Two-sided $p$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{6}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Analysis & Statistic & Observed & Null mean & Enrichment & Two-sided $p$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{6}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Full system & $N_{\mathrm{both}}$ & 98 & 61.805 & 1.586 & .002 \\
-Full system & $\\sum_p d_{PG}(p)d_{PD}(p)$ & 696 & 318.128 & 2.188 & .004 \\
+Full system & $\sum_p d_{PG}(p)d_{PD}(p)$ & 696 & 318.128 & 2.188 & .004 \\
 Highest degree-product contributor removed & $N_{\mathrm{both}}$ & 97 & 61.052 & 1.589 & .002 \\
-Highest degree-product contributor removed & $\\sum_p d_{PG}(p)d_{PD}(p)$ & 566 & 297.389 & 1.903 & .010 \\
-\\end{longtable}
+Highest degree-product contributor removed & $\sum_p d_{PG}(p)d_{PD}(p)$ & 566 & 297.389 & 1.903 & .010 \\
+\end{longtable}
 
-\\noindent\\small Note: The removed publication had $d_{PG}=10$, $d_{PD}=13$, and degree-product contribution 130. The publication identifier is retained in the machine-readable output but is not reported in the manuscript.
+\noindent\small Note: The removed publication had $d_{PG}=10$, $d_{PD}=13$, and degree-product contribution 130. The publication identifier is retained in the machine-readable output but is not reported in the manuscript.
 
-\\begin{longtable}{p{3.5cm}p{2.7cm}p{8.0cm}}
-\\caption{Availability of publication-language metadata.}\\label{tab:s9-language}\\\\
-\\toprule
+\begin{longtable}{p{3.5cm}p{2.7cm}p{8.0cm}}
+\caption{Availability of publication-language metadata.}\label{tab:s9-language}\\\
+\toprule
 Metadata field & Status & Note \\
-\\midrule
-\\endfirsthead
-\\multicolumn{3}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Metadata field & Status & Note \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{3}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
-language & not\\_returned & No language metadata field was available in the publication file. \\
-language\\_title & not\\_returned & No language metadata field was available in the publication file. \\
-\\end{longtable}
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
+language & not\_returned & No language metadata field was available in the publication file. \\
+language\_title & not\_returned & No language metadata field was available in the publication file. \\
+\end{longtable}
 
-\\noindent\\small Note: The matching dictionaries are English-language dictionaries. Because language metadata were not returned in the publication file, the language composition of the anchor cannot be quantified.
+\noindent\small Note: The matching dictionaries are English-language dictionaries. Because language metadata were not returned in the publication file, the language composition of the anchor cannot be quantified.
 
-\\begin{longtable}{p{5.2cm}p{4.0cm}r}
-\\caption{Variance inflation factors for focal indicators in main models.}\\label{tab:s10-vif}\\\\
-\\toprule
+\begin{longtable}{p{5.2cm}p{4.0cm}r}
+\caption{Variance inflation factors for focal indicators in main models.}\label{tab:s10-vif}\\\
+\toprule
 Model & Indicator & VIF \\
-\\midrule
-\\endfirsthead
-\\multicolumn{3}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Model & Indicator & VIF \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{3}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Grant linkage: primary & Computational-performance indicator & 1.044 \\
 Grant linkage: primary & Ethics/responsibility indicator & 1.044 \\
 Policy linkage: through 2021 & Computational-performance indicator & 1.056 \\
 Policy linkage: through 2021 & Ethics/responsibility indicator & 1.020 \\
 Policy linkage: through 2020 & Computational-performance indicator & 1.063 \\
 Policy linkage: through 2020 & Ethics/responsibility indicator & 1.017 \\
-\\end{longtable}
+\end{longtable}
 
-\\begin{longtable}{p{4.5cm}p{3.2cm}p{3.2cm}r}
-\\caption{Largest absolute Pearson correlation among predictors in each principal model.}\\label{tab:s11-correlations}\\\\
-\\toprule
+\begin{longtable}{p{4.5cm}p{3.2cm}p{3.2cm}r}
+\caption{Largest absolute Pearson correlation among predictors in each principal model.}\label{tab:s11-correlations}\\\
+\toprule
 Model & Predictor 1 & Predictor 2 & $|r|$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{4}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Model & Predictor 1 & Predictor 2 & $|r|$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{4}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Grant linkage: primary & Publication year (centered) & Log(1 + citations) & 0.375 \\
 Policy linkage: through 2021 & Conditions/symptoms & Assessment/diagnosis & 0.183 \\
 Policy linkage: through 2020 & Conditions/symptoms & Assessment/diagnosis & 0.191 \\
-\\end{longtable}
+\end{longtable}
 
-\\begin{longtable}{p{5.0cm}rrr}
-\\caption{Influence-screening diagnostics for principal models.}\\label{tab:s12-influence}\\\\
-\\toprule
+\begin{longtable}{p{5.0cm}rrr}
+\caption{Influence-screening diagnostics for principal models.}\label{tab:s12-influence}\\\
+\toprule
 Model & Maximum Cook's $D$ & Cases with $D>4/n$ & Maximum $|$DFBETA$|$ \\
-\\midrule
-\\endfirsthead
-\\multicolumn{4}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Model & Maximum Cook's $D$ & Cases with $D>4/n$ & Maximum $|$DFBETA$|$ \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{4}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Grant linkage: primary & 0.0013 & 862 & 0.107 \\
 Policy linkage: through 2021 & 0.0259 & 155 & 0.428 \\
 Policy linkage: through 2020 & 0.0339 & 121 & 0.460 \\
-\\end{longtable}
+\end{longtable}
 
-\\noindent\\small Note: These values are influence-screening diagnostics rather than case-deletion effect estimates. The targeted highest-contributor deletion test for the network alignment statistic is reported separately in Supplementary Table~\\ref{tab:s8-hub-deletion}.
+\noindent\small Note: These values are influence-screening diagnostics rather than case-deletion effect estimates. The targeted highest-contributor deletion test for the network alignment statistic is reported separately in Supplementary Table~\ref{tab:s8-hub-deletion}.
 
-\\begin{longtable}{p{8.2cm}r}
-\\caption{Record-level audit of the two-stage publication screen.}\\label{tab:s13-screening-audit}\\\\
-\\toprule
+\begin{longtable}{p{8.2cm}r}
+\caption{Record-level audit of the two-stage publication screen.}\label{tab:s13-screening-audit}\\\
+\toprule
 Audit quantity & Value \\
-\\midrule
-\\endfirsthead
-\\multicolumn{2}{l}{\\small\\itshape Continued from previous page} \\
-\\toprule
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\small\itshape Continued from previous page} \\
+\toprule
 Audit quantity & Value \\
-\\midrule
-\\endhead
-\\midrule
-\\multicolumn{2}{r}{\\small\\itshape Continued on next page} \\
-\\endfoot
-\\bottomrule
-\\endlastfoot
+\midrule
+\endhead
+\midrule
+\multicolumn{2}{r}{\small\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
 Candidate publications returned by the Dimensions query & 13,574 \\
 Publications retained in the anchor & 11,102 \\
 Candidate publications excluded by the deterministic local screen & 2,472 \\
@@ -401,8 +401,8 @@ Candidate records with an available abstract & 13,129 \\
 Candidate records without an abstract & 445 \\
 Saved decisions reproduced from the saved matched-term fields & Yes \\
 Rule-reproduction mismatches & 0 \\
-\\end{longtable}
+\end{longtable}
 
-\\noindent\\small Note: The audit verifies whether the saved retain/exclude decisions follow the documented literal screen when reconstructed from the saved AI/ML and core-mental-health matched-term fields. It does not establish perfect recall of all relevant research.
+\noindent\small Note: The audit verifies whether the saved retain/exclude decisions follow the documented literal screen when reconstructed from the saved AI/ML and core-mental-health matched-term fields. It does not establish perfect recall of all relevant research.
 
-\\end{document}
+\end{document}
