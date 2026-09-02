@@ -152,9 +152,9 @@ def figure_3_models(grant_models: pd.DataFrame, policy_models: pd.DataFrame, out
     """Create one readable grouped forest plot rather than three compressed panels."""
     terms = ["ethics_responsibility_primary", "computational_performance_primary"]
     specifications = [
-        (grant_models[grant_models["outcome"] == "has_grant_link"].copy(), "Grant linkage\n(all publications in P)", NAVY),
-        (policy_models[policy_models["analysis_sample"] == "publications_through_2021_primary"].copy(), "Policy linkage\n(publications through 2021)", TEAL),
-        (policy_models[policy_models["analysis_sample"] == "publications_through_2020_window_robustness"].copy(), "Policy linkage\n(publications through 2020)", PURPLE),
+        (grant_models[grant_models["outcome"] == "has_grant_link"].copy(), "Grant", NAVY),
+        (policy_models[policy_models["analysis_sample"] == "publications_through_2021_primary"].copy(), "Policy 2021", TEAL),
+        (policy_models[policy_models["analysis_sample"] == "publications_through_2020_window_robustness"].copy(), "Policy 2020", PURPLE),
     ]
     positions = [5, 4, 3, 2, 1, 0]
     rows = []
@@ -203,22 +203,17 @@ def figure_3_models(grant_models: pd.DataFrame, policy_models: pd.DataFrame, out
     ax.minorticks_off()
     ax.set_ylim(-0.72, 5.72)
     ax.set_yticks(positions)
-    ax.set_yticklabels([
-        "Ethics/responsibility\nindicator",
-        "Computational-performance\nindicator",
-        "Ethics/responsibility\nindicator",
-        "Computational-performance\nindicator",
-        "Ethics/responsibility\nindicator",
-        "Computational-performance\nindicator",
-    ], fontsize=8)
-    ax.tick_params(axis="y", length=0)
+    row_labels = [
+        f"{group_label}\n{term_label(str(row['term'])).replace(chr(10), ' ')}"
+        for _, row, group_label, _ in rows
+    ]
+    ax.set_yticklabels(row_labels, fontsize=7.7)
+    ax.tick_params(axis="y", length=0, pad=7)
     ax.set_xlabel("Adjusted odds ratio (log scale)", labelpad=10)
     fig.suptitle("Adjusted associations of primary publication indicators with recorded links", x=0.01, y=0.975, ha="left", fontsize=11, fontweight="bold")
-    for y, group_label in [(5.53, "Grant linkage\n(all publications in P)"), (3.53, "Policy linkage\n(publications through 2021)"), (1.53, "Policy linkage\n(publications through 2020)")]:
-        ax.text(-0.65, y, group_label, transform=ax.get_yaxis_transform(), ha="left", va="top", fontsize=8.2, fontweight="bold", clip_on=False)
     ax.text(1.03, 1.005, "OR [95% CI]", transform=ax.transAxes, ha="left", va="bottom", fontsize=8.4, fontweight="bold", clip_on=False)
     fig.text(0.01, 0.035, "Points are adjusted odds ratios; bars are 95% confidence intervals. All models adjust for publication year, log citations, and supplementary topic-family descriptors. Policy models use the primary through-2021 and more restrictive through-2020 publication-age eligibility samples; estimates are associational.", fontsize=7.1, color=MUTED, wrap=True)
-    fig.subplots_adjust(left=0.33, right=0.82, bottom=0.29, top=0.85)
+    fig.subplots_adjust(left=0.30, right=0.82, bottom=0.29, top=0.85)
     save_figure(fig, out, "figure_3_adjusted_associations", use_tight_layout=False)
 
 
