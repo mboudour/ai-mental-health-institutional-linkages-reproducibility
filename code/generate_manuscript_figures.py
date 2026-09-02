@@ -212,14 +212,59 @@ def figure_4_temporal(timing: pd.DataFrame, out: Path) -> None:
     save_figure(fig, out, "figure_4_temporal_ordering")
 
 
-def plot_null_hist(ax: plt.Axes, null_values: pd.Series, observed: float, title: str, x_label: str, enrichment: float, p_two: float) -> None:
-    ax.hist(null_values, bins=min(30, max(10, int(np.sqrt(len(null_values))))), color=LIGHT_BLUE, edgecolor="#8AA9BF")
-    ax.axvline(observed, color=RED, linewidth=2.2, label=f"Observed = {observed:.0f}")
+def plot_null_hist(
+    ax: plt.Axes,
+    null_values: pd.Series,
+    observed: float,
+    title: str,
+    x_label: str,
+    enrichment: float,
+    p_two: float,
+    offscale_observed: bool = False,
+) -> None:
+    """Plot a permutation null without wasting the axis on an off-scale observation."""
+    values = pd.Series(null_values, dtype=float).dropna()
+    ax.hist(values, bins=min(30, max(10, int(np.sqrt(len(values))))), color=LIGHT_BLUE, edgecolor="#8AA9BF")
     ax.set_title(title, loc="left", fontsize=10)
     ax.set_xlabel(x_label)
     ax.set_ylabel("Permutations")
-    ax.legend(frameon=False, fontsize=8)
-    ax.text(0.98, 0.96, f"Enrichment = {enrichment:.2f}\nTwo-sided p = {p_two:.3f}", transform=ax.transAxes, ha="right", va="top", fontsize=8.5, bbox=dict(boxstyle="round,pad=0.25", facecolor="white", edgecolor="#B4C4D1"))
+
+    if offscale_observed:
+        # The observed statistic is far beyond the null range. Showing it as a
+        # vertical line forces an uninformative empty span across the panel.
+        # Display the complete null distribution and report the off-scale value
+        # explicitly in a red-bordered annotation instead.
+        span = max(values.max() - values.min(), 1.0)
+        ax.set_xlim(values.min() - 0.04 * span, values.max() + 0.08 * span)
+        annotation = (
+            f"Observed = {observed:.0f}\n"
+            f"Null maximum = {values.max():.0f}\n"
+            f"Enrichment = {enrichment:.2f}\n"
+            f"Two-sided p = {p_two:.3f}"
+        )
+        ax.text(
+            0.98,
+            0.96,
+            annotation,
+            transform=ax.transAxes,
+            ha="right",
+            va="top",
+            fontsize=8.5,
+            bbox=dict(boxstyle="round,pad=0.30", facecolor="white", edgecolor=RED, linewidth=1.1),
+        )
+    else:
+        ax.axvline(observed, color=RED, linewidth=2.2, label=f"Observed = {observed:.0f}")
+        ax.legend(frameon=False, fontsize=8)
+        ax.text(
+            0.98,
+            0.96,
+            f"Enrichment = {enrichment:.2f}\nTwo-sided p = {p_two:.3f}",
+            transform=ax.transAxes,
+            ha="right",
+            va="top",
+            fontsize=8.5,
+            bbox=dict(boxstyle="round,pad=0.25", facecolor="white", edgecolor="#B4C4D1"),
+        )
 
 
 def figure_5_alignment(config: pd.DataFrame, null_summary: pd.DataFrame, null_replicates: pd.DataFrame, out: Path) -> None:
@@ -239,7 +284,7 @@ def figure_5_alignment(config: pd.DataFrame, null_summary: pd.DataFrame, null_re
     intensity_row = primary.loc["intensive_degree_product_sum"]
     null_primary = null_replicates[null_replicates["null_scheme"] == "publication_year_stratified_P_end_permutation"]
     plot_null_hist(axes[1], null_primary["N_both"], float(both_row["observed"]), "B. Extensive-margin alignment", "P publications with both P–G and P–D ties", float(both_row["observed_to_null_mean_enrichment"]), float(both_row["permutation_p_two_sided"]))
-    plot_null_hist(axes[2], null_primary["intensive_degree_product_sum"], float(intensity_row["observed"]), "C. Intensive-margin concentration", r"$\sum_p d_{PG}(p)\,d_{PD}(p)$", float(intensity_row["observed_to_null_mean_enrichment"]), float(intensity_row["permutation_p_two_sided"]))
+    plot_null_hist(axes[2], null_primary["intensive_degree_product_sum"], float(intensity_row["observed"]), "C. Intensive-margin concentration", r"$\sum_p d_{PG}(p)\,d_{PD}(p)$ under the primary null", float(intensity_row["observed_to_null_mean_enrichment"]), float(intensity_row["permutation_p_two_sided"]), offscale_observed=True)
     fig.suptitle("Local alignment of recorded grant and policy-document relations", x=0.01, y=1.02, ha="left", fontsize=12, fontweight="bold")
     fig.text(0.01, -0.04, "Primary null: complete P–D incidence profiles are reassigned within publication-year strata while P–G ties, policy-document endpoints, and issuer attributions are retained. This tests alignment of recorded ties, not causal pathways.", fontsize=8.3, color=MUTED)
     save_figure(fig, out, "figure_5_cross_relation_alignment")
