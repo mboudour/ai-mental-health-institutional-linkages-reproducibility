@@ -60,8 +60,9 @@ def require(path: Path) -> None:
         raise SystemExit(f"Required validated output is missing: {path}")
 
 
-def save_figure(fig: plt.Figure, out: Path, basename: str) -> None:
-    fig.tight_layout()
+def save_figure(fig: plt.Figure, out: Path, basename: str, use_tight_layout: bool = True) -> None:
+    if use_tight_layout:
+        fig.tight_layout()
     fig.savefig(out / f"{basename}.png", dpi=DPI, bbox_inches="tight", facecolor="white")
     fig.savefig(out / f"{basename}.pdf", bbox_inches="tight", facecolor="white")
     plt.close(fig)
@@ -147,43 +148,78 @@ def figure_2_indicators(overlap: pd.DataFrame, out: Path) -> None:
     save_figure(fig, out, "figure_2_text_indicators")
 
 
-def forest_panel(ax: plt.Axes, frame: pd.DataFrame, title: str) -> None:
+def figure_3_models(grant_models: pd.DataFrame, policy_models: pd.DataFrame, out: Path) -> None:
+    """Create one readable grouped forest plot rather than three compressed panels."""
     terms = ["ethics_responsibility_primary", "computational_performance_primary"]
-    data = frame[frame["term"].isin(terms)].copy()
-    data["term"] = pd.Categorical(data["term"], categories=terms, ordered=True)
-    data = data.sort_values("term", ascending=False)
-    y = np.arange(len(data))
-    ax.errorbar(
-        data["odds_ratio"], y,
-        xerr=np.vstack([data["odds_ratio"] - data["ci_95_odds_ratio_low"], data["ci_95_odds_ratio_high"] - data["odds_ratio"]]),
-        fmt="o", color=NAVY, ecolor=NAVY, capsize=3, markersize=6,
-    )
-    ax.axvline(1, color=MUTED, linewidth=1, linestyle="--")
+    specifications = [
+        (grant_models[grant_models["outcome"] == "has_grant_link"].copy(), "Grant linkage\n(all publications in P)", NAVY),
+        (policy_models[policy_models["analysis_sample"] == "publications_through_2021_primary"].copy(), "Policy linkage\n(publications through 2021)", TEAL),
+        (policy_models[policy_models["analysis_sample"] == "publications_through_2020_window_robustness"].copy(), "Policy linkage\n(publications through 2020)", PURPLE),
+    ]
+    positions = [5, 4, 3, 2, 1, 0]
+    rows = []
+    for (frame, group_label, color), group_positions in zip(specifications, [positions[:2], positions[2:4], positions[4:]]):
+        selected = frame[frame["term"].isin(terms)].copy()
+        selected["term"] = pd.Categorical(selected["term"], categories=terms, ordered=True)
+        selected = selected.sort_values("term")
+        if len(selected) != 2:
+            raise ValueError(f"Figure 3 requires both focal indicators for: {group_label}")
+        for y, (_, row) in zip(group_positions, selected.iterrows()):
+            rows.append((y, row, group_label, color))
+
+    fig, ax = plt.subplots(figsize=(8.7, 5.25))
+    for y, row, _, color in rows:
+        ax.errorbar(
+            row["odds_ratio"],
+            y,
+            xerr=np.array([[row["odds_ratio"] - row["ci_95_odds_ratio_low"]], [row["ci_95_odds_ratio_high"] - row["odds_ratio"]]]),
+            fmt="o",
+            color=color,
+            ecolor=color,
+            capsize=3.5,
+            markersize=6.5,
+            zorder=3,
+        )
+        # The estimate column lies outside the plotting region, so no value text
+        # crosses a confidence interval or the reference line.
+        ax.text(
+            1.03,
+            y,
+            f"{row['odds_ratio']:.2f} [{row['ci_95_odds_ratio_low']:.2f}, {row['ci_95_odds_ratio_high']:.2f}]",
+            transform=ax.get_yaxis_transform(),
+            ha="left",
+            va="center",
+            fontsize=8.4,
+            clip_on=False,
+        )
+
+    ax.axvline(1, color=MUTED, linewidth=1, linestyle="--", zorder=1)
+    ax.axhline(3.5, color="#D5DCE2", linewidth=0.8, zorder=0)
+    ax.axhline(1.5, color="#D5DCE2", linewidth=0.8, zorder=0)
     ax.set_xscale("log")
     ax.set_xlim(0.35, 4.4)
     ax.set_xticks([0.5, 1, 2, 4])
     ax.set_xticklabels(["0.5", "1", "2", "4"])
-    ax.set_yticks(y)
-    ax.set_yticklabels([term_label(value) for value in data["term"]])
-    ax.set_xlabel("Adjusted odds ratio (log scale)")
-    ax.set_title(title, loc="left", fontsize=10)
-    for yy, (_, row) in zip(y, data.iterrows()):
-        ax.text(4.25, yy, f"{row['odds_ratio']:.2f} [{row['ci_95_odds_ratio_low']:.2f}, {row['ci_95_odds_ratio_high']:.2f}]", va="center", ha="right", fontsize=8)
-
-
-def figure_3_models(grant_models: pd.DataFrame, policy_models: pd.DataFrame, out: Path) -> None:
-    grant = grant_models[grant_models["outcome"] == "has_grant_link"].copy()
-    policy_primary = policy_models[policy_models["analysis_sample"] == "publications_through_2021_primary"].copy()
-    policy_robustness = policy_models[policy_models["analysis_sample"] == "publications_through_2020_window_robustness"].copy()
-    fig, axes = plt.subplots(1, 3, figsize=(17.0, 5.2), sharey=True)
-    forest_panel(axes[0], grant, "A. Grant linkage: all publications in P")
-    forest_panel(axes[1], policy_primary, "B. Policy linkage: P through 2021")
-    forest_panel(axes[2], policy_robustness, "C. Policy linkage: P through 2020")
-    axes[1].tick_params(labelleft=True)
-    axes[2].tick_params(labelleft=True)
-    fig.suptitle("Adjusted associations of primary publication indicators with recorded links", x=0.02, ha="left", y=1.02, fontsize=12, fontweight="bold")
-    fig.text(0.01, -0.02, "Models adjust for publication year, log citations, and supplementary topic-family variables. Panels B and C are the primary and more restrictive publication-age eligibility analyses; estimates are associational.", fontsize=8.5, color=MUTED)
-    save_figure(fig, out, "figure_3_adjusted_associations")
+    ax.minorticks_off()
+    ax.set_ylim(-0.72, 5.72)
+    ax.set_yticks(positions)
+    ax.set_yticklabels([
+        "Ethics/responsibility\nindicator",
+        "Computational-performance\nindicator",
+        "Ethics/responsibility\nindicator",
+        "Computational-performance\nindicator",
+        "Ethics/responsibility\nindicator",
+        "Computational-performance\nindicator",
+    ], fontsize=8)
+    ax.tick_params(axis="y", length=0)
+    ax.set_xlabel("Adjusted odds ratio (log scale)", labelpad=10)
+    fig.suptitle("Adjusted associations of primary publication indicators with recorded links", x=0.01, y=0.975, ha="left", fontsize=11, fontweight="bold")
+    for y, group_label in [(5.53, "Grant linkage\n(all publications in P)"), (3.53, "Policy linkage\n(publications through 2021)"), (1.53, "Policy linkage\n(publications through 2020)")]:
+        ax.text(-0.65, y, group_label, transform=ax.get_yaxis_transform(), ha="left", va="top", fontsize=8.2, fontweight="bold", clip_on=False)
+    ax.text(1.03, 1.005, "OR [95% CI]", transform=ax.transAxes, ha="left", va="bottom", fontsize=8.4, fontweight="bold", clip_on=False)
+    fig.text(0.01, 0.035, "Points are adjusted odds ratios; bars are 95% confidence intervals. All models adjust for publication year, log citations, and supplementary topic-family descriptors. Policy models use the primary through-2021 and more restrictive through-2020 publication-age eligibility samples; estimates are associational.", fontsize=7.1, color=MUTED, wrap=True)
+    fig.subplots_adjust(left=0.33, right=0.82, bottom=0.29, top=0.85)
+    save_figure(fig, out, "figure_3_adjusted_associations", use_tight_layout=False)
 
 
 def figure_4_temporal(timing: pd.DataFrame, out: Path) -> None:
